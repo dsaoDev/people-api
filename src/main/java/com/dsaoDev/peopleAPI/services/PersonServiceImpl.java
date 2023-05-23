@@ -8,10 +8,9 @@ import org.springframework.stereotype.Service;
 import com.dsaoDev.peopleAPI.dtos.PersonRequestDTO;
 import com.dsaoDev.peopleAPI.dtos.PersonResponseDTO;
 import com.dsaoDev.peopleAPI.entities.Person;
+import com.dsaoDev.peopleAPI.exceptions.PersonNotFoundException;
 import com.dsaoDev.peopleAPI.repositories.PersonRepository;
 import com.dsaoDev.peopleAPI.util.PersonMapper;
-
-import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class PersonServiceImpl implements PersonService {
@@ -36,7 +35,7 @@ public class PersonServiceImpl implements PersonService {
 	//FindById retornando PersonResponseDTO
 	@Override
 	public PersonResponseDTO findById(Long id) {
-		return personMapper.convertFromPersonToDTO(repository.findById(id).orElseThrow(() -> new EntityNotFoundException()));
+		return personMapper.convertFromPersonToDTO(repository.findById(id).orElseThrow(() -> new PersonNotFoundException("id: " + id + " não existe")));
 	}
 
 	@Override
@@ -59,7 +58,7 @@ public class PersonServiceImpl implements PersonService {
 	
 	  //FindById retornando Person // Re-uso
 		public Person returnPerson(Long id) {
-			return repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Id não encontrado : " + id));
+			return repository.findById(id).orElseThrow(() -> new PersonNotFoundException("id: " + id + " não existe"));
 		}
 
 
