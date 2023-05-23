@@ -1,5 +1,8 @@
 package com.dsaoDev.peopleAPI.util;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.stereotype.Component;
 
 import com.dsaoDev.peopleAPI.dtos.PersonRequestDTO;
@@ -21,6 +24,18 @@ public class PersonMapper {
 	
 	public PersonResponseDTO convertFromPersonToDTO(Person person) {
 		return new PersonResponseDTO(person);
+	}
+	
+	public List<PersonResponseDTO> converterLista(List<Person> personList){
+		return personList.stream().map(person -> new PersonResponseDTO(person)).collect(Collectors.toList());
+	}
+	
+	public void atualizarPessoa(Person person, PersonRequestDTO personDTO) {
+		person.setEmail(personDTO.getEmail());
+		person.setNome(personDTO.getNome());
+		person.setCpf(personDTO.getCpf());
+		person.setSexo(personDTO.getSexo());
+		person.setDataNasc(personDTO.getDataNasc());
 	}
 	
 
