@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,7 +40,7 @@ public class PersonController {
 		return ResponseEntity.ok(personService.findById(id));
 	}
 	
-	@PostMapping(value = "/{id}")
+	@PutMapping(value = "/{id}")
 	public ResponseEntity<PersonResponseDTO> update (@RequestBody PersonRequestDTO personDTO, @PathVariable(name = "id")Long id){
 		return ResponseEntity.ok(personService.update(personDTO, id));
 	}
