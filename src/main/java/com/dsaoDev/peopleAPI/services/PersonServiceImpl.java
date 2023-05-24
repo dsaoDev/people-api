@@ -29,7 +29,7 @@ public class PersonServiceImpl implements PersonService {
 
 	@Override
 	public List<PersonResponseDTO> findAll() {
-		return personMapper.converterLista(repository.findAll());
+		return personMapper.converterLista(personMapper.checkIfListIsEmpty(repository.findAll()));
 	}
 	
 	//FindById retornando PersonResponseDTO

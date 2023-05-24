@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.dsaoDev.peopleAPI.errors.ErrorDescription;
+import com.dsaoDev.peopleAPI.exceptions.EmptyListException;
 import com.dsaoDev.peopleAPI.exceptions.PersonNotFoundException;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,5 +21,11 @@ public class GlobalExceptionHandler {
 		 ErrorDescription error = new ErrorDescription(Instant.now(), HttpStatus.NOT_FOUND.value(), "Entidade não foi encontrada", e.getMessage(), request.getRequestURI());
 		 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
 		                        
-	}						
+	}
+	
+	@ExceptionHandler(EmptyListException.class)
+	public ResponseEntity<ErrorDescription> EmptyListEx(EmptyListException e, HttpServletRequest request){
+		ErrorDescription error = new ErrorDescription(Instant.now(), HttpStatus.NOT_FOUND.value(), "Lista vazia", e.getMessage(), request.getRequestURI());
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+	}
 }
