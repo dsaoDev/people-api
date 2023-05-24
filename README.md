@@ -67,3 +67,17 @@ MySQL WorkBench - Plataforma utilizada para fazer a manipulação e a leitura do
 
 Git e GitHub - Utilizados para commitar o projeto e subir o código para a nuvem(remoto). 
 
+## Como Executar o Projeto
+### Pré Requisitos: JAVA 17, Eclipse ou STS IDE
+
+```
+# clonar repositorio
+git clone https://github.com/dsaoDev/people-api.git
+
+# entrar na pasta do projeto
+cd people-api
+
+# executar o projeto
+./mvnw spring-boot:run
+```
+
