@@ -49,8 +49,7 @@ public class GlobalExceptionHandler {
 		Map<String, String> mapOfErrors = new HashMap<>();
 
 		e.getBindingResult().getFieldErrors()
-				.forEach(error -> mapOfErrors.put("Erro no campo -> " + error.getField(), error.getDefaultMessage()));
-
+				.forEach(error ->  mapOfErrors.put("Erro no campo -> " + error.getField(), error.getDefaultMessage()));
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(mapOfErrors);
 
 	}
@@ -59,6 +58,7 @@ public class GlobalExceptionHandler {
 	@ExceptionHandler(HttpMessageNotReadableException.class)
 	public ResponseEntity<ErrorDescription> HttpMessageNotReadableE(HttpMessageNotReadableException e,
 			HttpServletRequest request) {
+		
 		ErrorDescription error = new ErrorDescription(Instant.now(), HttpStatus.BAD_REQUEST.value(),
 				"Parametro de data invalido", "Formato de data esperado dd/MM/yyyy", request.getRequestURI());
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
