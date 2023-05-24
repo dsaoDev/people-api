@@ -18,6 +18,8 @@ import com.dsaoDev.peopleAPI.dtos.PersonRequestDTO;
 import com.dsaoDev.peopleAPI.dtos.PersonResponseDTO;
 import com.dsaoDev.peopleAPI.services.PersonService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping(value = "/api/people")
 public class PersonController {
@@ -26,7 +28,7 @@ public class PersonController {
 	PersonService personService;
 	
 	@PostMapping
-	public ResponseEntity<PersonResponseDTO> save (@RequestBody PersonRequestDTO personDTO){
+	public ResponseEntity<PersonResponseDTO> save (@Valid @RequestBody PersonRequestDTO personDTO){
 		return new ResponseEntity<PersonResponseDTO>(personService.save(personDTO), HttpStatus.CREATED);
 	}
 	
@@ -41,7 +43,7 @@ public class PersonController {
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<PersonResponseDTO> update (@RequestBody PersonRequestDTO personDTO, @PathVariable(name = "id")Long id){
+	public ResponseEntity<PersonResponseDTO> update (@Valid @RequestBody PersonRequestDTO personDTO, @PathVariable(name = "id")Long id){
 		return ResponseEntity.ok(personService.update(personDTO, id));
 	}
 	

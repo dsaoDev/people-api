@@ -1,13 +1,12 @@
 package com.dsaoDev.peopleAPI.dtos;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 import com.dsaoDev.peopleAPI.entities.Person;
 import com.dsaoDev.peopleAPI.entities.enums.Genero;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
-import lombok.Getter;
 
-@Getter
 public class PersonResponseDTO {
 	
 	private Long id;
@@ -18,7 +17,7 @@ public class PersonResponseDTO {
 	
 	private String cpf;
 	
-	private LocalDate dataNasc;
+	private Date dataNasc;
 	
 	private Genero sexo;
 
@@ -31,6 +30,38 @@ public class PersonResponseDTO {
 		this.dataNasc = entity.getDataNasc();
 		this.sexo = entity.getSexo();
 	}
+
+
+	public Long getId() {
+		return id;
+	}
+
+
+	public String getNome() {
+		return nome;
+	}
+
+
+	public String getEmail() {
+		return email;
+	}
+
+
+	public String getCpf() {
+		return cpf;
+	}
+	
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd/MM/yyyy")
+	public Date getDataNasc() {
+		return dataNasc;
+	}
+
+
+	public Genero getSexo() {
+		return sexo;
+	}
+	
+	
 	
 	
 }
