@@ -5,5 +5,4 @@ public enum Genero {
 	FEMININO,
 	masculino,
 	feminino
-	
 }
