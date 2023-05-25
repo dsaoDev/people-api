@@ -14,7 +14,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import lombok.AccessLevel;
-import lombok.Builder;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,6 +23,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Entity
+@AllArgsConstructor
 public class Person {
 	
 	@Id
@@ -46,14 +47,7 @@ public class Person {
 	@Enumerated(EnumType.STRING)
 	private Genero sexo;
 
-	@Builder
-	public Person(String nome, String email, String cpf, Date dataNasc, Genero sexo) {
-		this.nome = nome;
-		this.email = email;
-		this.cpf = cpf;
-		this.dataNasc = dataNasc;
-		this.sexo = sexo;
-	}
+	
 	
 	
 

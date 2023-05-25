@@ -20,16 +20,19 @@ public class PersonResponseDTO {
 	private Date dataNasc;
 	
 	private Genero sexo;
+	
+	
+	public PersonResponseDTO(Person person) {
+		this.id = person.getId();
+		this.nome = person.getNome();
+		this.email = person.getEmail();
+		this.cpf = person.getCpf();
+		this.dataNasc = person.getDataNasc();
+		this.sexo = person.getSexo();
 
-
-	public PersonResponseDTO(Person entity) {
-		this.id = entity.getId();
-		this.nome = entity.getNome();
-		this.email = entity.getEmail();
-		this.cpf = entity.getCpf();
-		this.dataNasc = entity.getDataNasc();
-		this.sexo = entity.getSexo();
 	}
+
+
 
 
 	public Long getId() {

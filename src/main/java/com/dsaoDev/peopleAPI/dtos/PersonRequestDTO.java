@@ -34,6 +34,5 @@ public class PersonRequestDTO {
 	@NotNull(message = "campo DATA é obrigatorio")
 	private Date dataNasc;
 	
-   
 	private Genero sexo;
 }

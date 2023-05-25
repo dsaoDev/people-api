@@ -9,40 +9,46 @@ import com.dsaoDev.peopleAPI.dtos.PersonRequestDTO;
 import com.dsaoDev.peopleAPI.dtos.PersonResponseDTO;
 import com.dsaoDev.peopleAPI.entities.Person;
 import com.dsaoDev.peopleAPI.exceptions.PersonNotFoundException;
+import com.dsaoDev.peopleAPI.mapper.ModelMapper;
 import com.dsaoDev.peopleAPI.repositories.PersonRepository;
-import com.dsaoDev.peopleAPI.util.PersonMapper;
+import com.dsaoDev.peopleAPI.util.PersonUtil;
 
 @Service
 public class PersonServiceImpl implements PersonService {
 	
 	@Autowired
 	PersonRepository repository;
-	
 	@Autowired
-	PersonMapper personMapper;
+	PersonUtil personUtil;
+
+	
 
 	@Override
 	public PersonResponseDTO save(PersonRequestDTO personRequestDTO) {
-		Person person = personMapper.convertFromDtoToPerson(personRequestDTO);
-		return personMapper.convertFromPersonToDTO(repository.save(person));
+		Person person = ModelMapper.INSTANCE.convertToPerson(personRequestDTO);
+		return ModelMapper.INSTANCE.convertToDTO(repository.save(person));
+		
+		
+		
+		
 	}
 
 	@Override
 	public List<PersonResponseDTO> findAll() {
-		return personMapper.converterLista(personMapper.checkIfListIsEmpty(repository.findAll()));
+		return ModelMapper.INSTANCE.listConverter(personUtil.checkIfListIsEmpty(repository.findAll()));
+		
 	}
 	
-	//FindById retornando PersonResponseDTO
 	@Override
 	public PersonResponseDTO findById(Long id) {
-		return personMapper.convertFromPersonToDTO(repository.findById(id).orElseThrow(() -> new PersonNotFoundException("id: " + id + " não existe")));
+		return ModelMapper.INSTANCE.convertToDTO(repository.findById(id).orElseThrow(() -> new PersonNotFoundException("id: " + id + " não existe")));
 	}
 
 	@Override
 	public PersonResponseDTO update(PersonRequestDTO personRequestDTO, Long id) {
 		Person person = returnPerson(id);
-		personMapper.atualizarPessoa(person, personRequestDTO);
-		return personMapper.convertFromPersonToDTO(repository.save(person));
+		personUtil.atualizarPessoa(person, personRequestDTO);
+		return ModelMapper.INSTANCE.convertToDTO(repository.save(person));
 		
 	}
 
