@@ -17,7 +17,6 @@ import lombok.Getter;
 public class PersonRequestDTO {
 
 	
-	
 	@NotBlank(message = "campo nome é obrigatorio")
 	@Size(min = 2, message = "nome tem que ter pelomenos 2 caracteres")
 	private String nome;

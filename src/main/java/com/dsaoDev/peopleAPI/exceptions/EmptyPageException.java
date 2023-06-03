@@ -1,10 +1,10 @@
 package com.dsaoDev.peopleAPI.exceptions;
 
-public class EmptyListException extends RuntimeException{
+public class EmptyPageException extends RuntimeException{
 
 	private static final long serialVersionUID = 1L;
 	
-	public EmptyListException(String msg) {
+	public EmptyPageException(String msg) {
 		super(msg);
 	}
 	

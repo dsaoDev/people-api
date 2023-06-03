@@ -1,8 +1,8 @@
 package com.dsaoDev.peopleAPI.services;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.dsaoDev.peopleAPI.dtos.PersonRequestDTO;
@@ -17,9 +17,9 @@ import com.dsaoDev.peopleAPI.util.PersonUtil;
 public class PersonServiceImpl implements PersonService {
 	
 	@Autowired
-	PersonRepository repository;
+	private PersonRepository repository;
 	@Autowired
-	PersonUtil personUtil;
+	private PersonUtil personUtil;
 
 	
 
@@ -34,8 +34,8 @@ public class PersonServiceImpl implements PersonService {
 	}
 
 	@Override
-	public List<PersonResponseDTO> findAll() {
-		return ModelMapper.INSTANCE.listConverter(personUtil.checkIfListIsEmpty(repository.findAll()));
+	public Page<PersonResponseDTO> findAll(Pageable pageable) {
+		return personUtil.pageConverter(personUtil.checkIfPageIsEmpty(repository.findAll(pageable)));
 		
 	}
 	

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.dsaoDev.peopleAPI.errors.ErrorDescription;
-import com.dsaoDev.peopleAPI.exceptions.EmptyListException;
+import com.dsaoDev.peopleAPI.exceptions.EmptyPageException;
 import com.dsaoDev.peopleAPI.exceptions.PersonNotFoundException;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -29,9 +29,9 @@ public class GlobalExceptionHandler {
 
 	}
 
-	@ExceptionHandler(EmptyListException.class)
-	public ResponseEntity<ErrorDescription> emptyListEx(EmptyListException e, HttpServletRequest request) {
-		ErrorDescription error = new ErrorDescription(Instant.now(), HttpStatus.NOT_FOUND.value(), "Lista vazia",
+	@ExceptionHandler(EmptyPageException.class)
+	public ResponseEntity<ErrorDescription> emptyPageEx(EmptyPageException e, HttpServletRequest request) {
+		ErrorDescription error = new ErrorDescription(Instant.now(), HttpStatus.NOT_FOUND.value(), "Todas as paginas se encontram vazias",
 				e.getMessage(), request.getRequestURI());
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
 	}

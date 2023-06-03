@@ -1,18 +1,16 @@
 package com.dsaoDev.peopleAPI.util;
 
-import java.util.List;
-
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import com.dsaoDev.peopleAPI.dtos.PersonRequestDTO;
+import com.dsaoDev.peopleAPI.dtos.PersonResponseDTO;
 import com.dsaoDev.peopleAPI.entities.Person;
-import com.dsaoDev.peopleAPI.exceptions.EmptyListException;
+import com.dsaoDev.peopleAPI.exceptions.EmptyPageException;
+import com.dsaoDev.peopleAPI.mapper.ModelMapper;
 
 @Component
 public class PersonUtil {
-	
-	
-	
 	
 	public void atualizarPessoa(Person person, PersonRequestDTO personDTO) {
 		person.setEmail(personDTO.getEmail());
@@ -22,13 +20,23 @@ public class PersonUtil {
 		person.setDataNasc(personDTO.getDataNasc());
 	}
 	
-	public List<Person> checkIfListIsEmpty (List<Person> list) {
-		if (list.isEmpty()) {
-			throw new EmptyListException("no momento a lista se encontra vazia");
+	public Page<Person> checkIfPageIsEmpty (Page<Person> pageOfPerson) {
+		if (pageOfPerson.isEmpty()) {
+			throw new EmptyPageException("Paginas vazias");
 		}
-		return list;
+		return pageOfPerson;
 
 	}
+	
+	public Page<PersonResponseDTO> pageConverter (Page<Person> pageOfEntity){
+		 Page<PersonResponseDTO> dtosPage = pageOfEntity.map(this::returnInstanceConverter);
+		 return dtosPage;
+			
+		}
+	
+	public PersonResponseDTO returnInstanceConverter(Person person) {
+	return ModelMapper.INSTANCE.convertToDTO(person);
 
+ }
 
 }
