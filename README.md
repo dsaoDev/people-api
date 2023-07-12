@@ -12,15 +12,15 @@ Essa é uma aplicação de CRUD com validações em que consiste em manipular da
 
 ##	Funcionalidades
 
-- Encontra um Livro registrado no sistema por ID.
+- Encontra uma Pessoa registrado no sistema por ID.
 
-- Encontra uma lista de Livros registrados no sistema.
+- Encontra uma Página de Pessoas registradas no sistema.
 
-- Registra um Livro no sistema.
+- Registra uma Pessoa no sistema.
 
-- Atualiza dados de um Livro do sistema.
+- Atualiza dados de uma Pessoa do sistema.
 
-- Deleta um Livro do sistema.
+- Deleta uma Pessoa do sistema.
 
 ## Versionamento 
 
