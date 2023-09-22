@@ -1,6 +1,9 @@
 package com.dsaoDev.peopleAPI.entities;
 
+import java.time.LocalDateTime;
 import java.util.Date;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 import com.dsaoDev.peopleAPI.entities.enums.Genero;
 
@@ -46,6 +49,9 @@ public class Person {
 	
 	@Enumerated(EnumType.STRING)
 	private Genero sexo;
+	
+	@CreationTimestamp
+	private LocalDateTime dataCriacao;
 
 	
 	

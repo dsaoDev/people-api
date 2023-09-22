@@ -7,7 +7,7 @@ import com.dsaoDev.peopleAPI.dtos.PersonRequestDTO;
 import com.dsaoDev.peopleAPI.dtos.PersonResponseDTO;
 import com.dsaoDev.peopleAPI.entities.Person;
 import com.dsaoDev.peopleAPI.exceptions.EmptyPageException;
-import com.dsaoDev.peopleAPI.mapper.ModelMapper;
+import com.dsaoDev.peopleAPI.mapper.PeopleMapper;
 
 @Component
 public class PersonUtil {
@@ -35,7 +35,7 @@ public class PersonUtil {
 		}
 	
 	public PersonResponseDTO returnInstanceConverter(Person person) {
-	return ModelMapper.INSTANCE.convertToDTO(person);
+	return PeopleMapper.INSTANCE.convertToDTO(person);
 
  }
 

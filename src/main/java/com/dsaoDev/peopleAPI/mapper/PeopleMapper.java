@@ -11,9 +11,9 @@ import com.dsaoDev.peopleAPI.entities.Person;
 
 
 @Mapper(unmappedSourcePolicy = ReportingPolicy.IGNORE)
-public interface ModelMapper {
+public interface PeopleMapper {
 	
-	ModelMapper INSTANCE = Mappers.getMapper(ModelMapper.class);
+	PeopleMapper INSTANCE = Mappers.getMapper(PeopleMapper.class);
 	
 	PersonResponseDTO convertToDTO(Person person);
 	Person convertToPerson (PersonRequestDTO personDTO);

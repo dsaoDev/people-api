@@ -9,7 +9,7 @@ import com.dsaoDev.peopleAPI.dtos.PersonRequestDTO;
 import com.dsaoDev.peopleAPI.dtos.PersonResponseDTO;
 import com.dsaoDev.peopleAPI.entities.Person;
 import com.dsaoDev.peopleAPI.exceptions.PersonNotFoundException;
-import com.dsaoDev.peopleAPI.mapper.ModelMapper;
+import com.dsaoDev.peopleAPI.mapper.PeopleMapper;
 import com.dsaoDev.peopleAPI.repositories.PersonRepository;
 import com.dsaoDev.peopleAPI.util.PersonUtil;
 
@@ -25,12 +25,20 @@ public class PersonServiceImpl implements PersonService {
 
 	@Override
 	public PersonResponseDTO save(PersonRequestDTO personRequestDTO) {
-		Person person = ModelMapper.INSTANCE.convertToPerson(personRequestDTO);
-		return ModelMapper.INSTANCE.convertToDTO(repository.save(person));
+		Person person = PeopleMapper.INSTANCE.convertToPerson(personRequestDTO);
+		
+		
+	var DTO = PeopleMapper.INSTANCE.convertToDTO(repository.save(person));
+	
+		DTO.setCpf(formatarCPF(DTO.getCpf()));
+		
+		return DTO;
 		
 		
 		
-		
+	}
+	private String formatarCPF(String cpf) {
+		return cpf.substring(0, 3) + "." + cpf.substring(3, 6) + "." + cpf.substring(6, 9) + "-" + cpf.substring(9);
 	}
 
 	@Override
@@ -41,14 +49,14 @@ public class PersonServiceImpl implements PersonService {
 	
 	@Override
 	public PersonResponseDTO findById(Long id) {
-		return ModelMapper.INSTANCE.convertToDTO(repository.findById(id).orElseThrow(() -> new PersonNotFoundException("id: " + id + " não existe")));
+		return PeopleMapper.INSTANCE.convertToDTO(repository.findById(id).orElseThrow(() -> new PersonNotFoundException("id: " + id + " não existe")));
 	}
 
 	@Override
 	public PersonResponseDTO update(PersonRequestDTO personRequestDTO, Long id) {
 		Person person = returnPerson(id);
 		personUtil.atualizarPessoa(person, personRequestDTO);
-		return ModelMapper.INSTANCE.convertToDTO(repository.save(person));
+		return PeopleMapper.INSTANCE.convertToDTO(repository.save(person));
 		
 	}
 
